@@ -1,0 +1,24 @@
+{
+  "name": "battleships",
+  "version": "1.0.0",
+  "description": "Coding dojo kata to create a battleshipslike game",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "webpack-dev-server --mode=development --config webpack.config.js",
+    "test": "jasmine --config=jasmine.json"
+  },
+  "author": "Coding Dojo Silesia",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "html-webpack-plugin": "^3.2.0",
+    "jasmine": "^3.4.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.8.0"
+  }
+}
