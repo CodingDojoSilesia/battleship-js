@@ -5,56 +5,81 @@ export default class Drawer {
     this.table = document.createElement('table');
   }
 
-  createHeader() {
-    const width = this.board[0].length;
+  draw(callback) {
+    this.generateTable(callback);
+    this.attachTable();
+  }
+
+  updateCell(row, col, text) {
+    const id = this.generateId(this.location, row, col);
+    const cell = document.getElementById(id);
+    cell.innerText = text;
+  }
+
+  makeCell({ id, text, event }) {
+    const td = document.createElement('td');
+    if (id) {
+      td.setAttribute('id', id);
+    }
+    if (text) {
+      td.innerText = text;
+    }
+    if (event) {
+      td.addEventListener('click', event);
+    }
+    return td;
+  }
+
+  makeRow(firstCellData, funcToGenerateCells) {
     const row = document.createElement('tr');
-    for (let i = 0; i < width + 1; i++) {
-      const cell = document.createElement('td');
-      if (i !== 0) cell.innerHTML = String.fromCharCode(64 + i);
-      row.appendChild(cell);
+    const width = this.board[0].length;
+    const location = this.location;
+    row.appendChild(this.makeCell(firstCellData));
+    for (let colIndex = 1; colIndex <= width; colIndex++) {
+      const data = funcToGenerateCells(colIndex, location);
+      row.appendChild(this.makeCell(data));
     }
     return row;
   }
 
-  createFirstCell(value, row) {
-    const cell = document.createElement('td');
-    cell.innerHTML = value;
-    row.appendChild(cell);
+  indexToChar(i) {
+    return String.fromCharCode(64 + i);
   }
 
-  createCell(value, i, j, row) {
-    const cell = document.createElement('td');
-    cell.innerHTML = value;
-    cell.setAttribute('id', `${String.fromCharCode(65 + j)}${i + 1}`);
-    row.appendChild(cell);
+  createHeader() {
+    return this.makeRow({}, (col) => {
+      return {
+        text: this.indexToChar(col),
+      };
+    });
   }
 
-  createRow(i, j, row, value) {
-    if (j === 0) {
-      this.createFirstCell(j + 1, row);
-    }
-    this.createCell(value, i, j, row);
+  generateId(loc, row, col) {
+    return `${loc}-${this.indexToChar(col)}-${row}`;
   }
 
-  generateTable() {
+  generateTable(callback) {
     const header = this.createHeader();
     this.table.appendChild(header);
-    for (let i = 0; i < this.board.length; i++) {
-      const row = document.createElement('tr');
-      for (let j = 0; j < this.board[i].length; j++) {
-        this.createRow(i, j, row, this.board[i][j]);
-        this.table.appendChild(row);
-      }
+
+    for (let rowIndex = 0; rowIndex < this.board.length; rowIndex++) {
+      const firstCellData = { text: rowIndex + 1 };
+      const row = this.makeRow(firstCellData, (col, loc) => {
+        const id = this.generateId(loc, rowIndex + 1, col);
+        return {
+          id,
+          text: this.board[rowIndex][col - 1],
+          event: () => {
+            callback({ loc, col, row: rowIndex + 1 });
+          },
+        };
+      });
+      this.table.appendChild(row);
     }
   }
 
-  fillTable() {
+  attachTable() {
     const location = document.getElementById(this.location);
     location.appendChild(this.table);
-  }
-
-  draw() {
-    this.generateTable();
-    this.fillTable();
   }
 }

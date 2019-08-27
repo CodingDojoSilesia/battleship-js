@@ -8,10 +8,24 @@
   <link rel="shortcut icon" href="#"/>
   <meta name="description" content="Battleshipslike game">
   <meta name="author" content="Coding Dojo Silesia">
+  <style>
+    .game {
+      height: 100vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+  </style>
 </head>
 
 <body>
-<div id="game"></div>
+<div class="game">
+  <div id="table-left"></div>
+  <div id="table-right"></div>
+</div>
+
+
 <script src="bundle.js"></script>
 </body>
 </html>
