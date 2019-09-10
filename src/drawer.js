@@ -31,7 +31,6 @@ export default class Drawer {
     const id = this.generateId(this.location, row, col);
     const cell = document.getElementById(id);
     cell.innerText = text;
-    this.board[row][col] = text;
   }
 
   makeCell({ id, text, event }) {

@@ -20,6 +20,5 @@ describe('Drawer test suite', () => {
     drawer.updateCell(0, 0, 'X');
 
     expect(obj.innerText).toBe('X');
-    expect(board[0][0]).toBe('X');
   });
 });
