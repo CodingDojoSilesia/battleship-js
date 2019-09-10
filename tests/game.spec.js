@@ -7,9 +7,12 @@ describe("Game test suite", () => {
     const game = new Game({width: 1, height: 1});
     game.leftDrawer = jasmine.createSpyObj('Drawer', ['draw']);
     game.rightDrawer = jasmine.createSpyObj('Drawer', ['draw']);
+    spyOn(game, 'updateMessage');
+
     game.run();
 
     expect(game.leftDrawer.draw).toHaveBeenCalled();
     expect(game.rightDrawer.draw).toHaveBeenCalled();
+    expect(game.updateMessage).toHaveBeenCalledWith('START');
   });
 });

@@ -14,17 +14,27 @@ export default class Game {
     this.rightDrawer = new Drawer('table-right', this.board);
   }
 
+  updateMessage(message) {
+    /**
+     * Set message from messages for state
+     * @param {str} message - Value of the message
+     */
+    const messageEl = document.getElementById('messages');
+    messageEl.innerText = message;
+  }
+
   run() {
     /**
      * Main function to run game. Now is responsible to draw two board in html
      */
+    this.updateMessage('START');
     this.leftDrawer.draw(this.click.bind(this));
     this.rightDrawer.draw(this.click.bind(this));
   }
 
   click({ col, row, loc }) {
     /**
-     * Callback function for board.
+     * Callback function for board
      * @param {int} col - Column of board.
      * @param {int} row - Row of board.
      * @param {string} loc - Location of board.
