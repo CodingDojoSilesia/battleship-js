@@ -12,15 +12,25 @@
     body {
         background-color: #02A4D3;
         color: white;
+        font-size: 18pt;
+        margin: 0;
+        padding: 0;
     }
     .game {
       height: 100vh;
       display: flex;
-      flex-direction: row;
-      justify-content: space-around;
+      flex-direction: column;
       align-items: center;
-      font-size: 18pt;
+      justify-content: space-around;
     }
+
+    #board {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
     table {
         border-collapse: collapse;
         border: 4px solid #C3CDE6;
@@ -37,8 +47,11 @@
 
 <body>
 <div class="game">
-  <div id="table-left"></div>
-  <div id="table-right"></div>
+  <div id="messages"></div>
+  <div id="board">
+    <div id="table-left"></div>
+    <div id="table-right"></div>
+  </div>
 </div>
 
 
